@@ -23,19 +23,38 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
 
-  const PWA_URL = "https://app-tcc-v4.vercel.app"; // ← COLOQUE A URL DO SEU PWA AQUI
-
-  // Função para instalar o app
-  const handleInstallClick = () => {
-    // Redireciona para o PWA com parâmetro de instalação
-    window.location.href = `${PWA_URL}?install=true`;
-  };
-
-  // Função para acessar o app (sem instalação)
-  const handleAccessApp = () => {
-    window.location.href = PWA_URL;
-  };
+  const handleInstallClick = async () => {
+  // Detectar se é dispositivo móvel
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
+  if (isMobile) {
+    // Tenta abrir diretamente o app se já estiver instalado
+     const PWA_URL = "https://app-tcc-v4.vercel.app"; // ← COLOQUE A URL DO SEU PWA AQUI
+    
+    if (/Android/i.test(navigator.userAgent)) {
+      // Para Android: tenta abrir com intent
+      const intentUrl = `intent://${PWA_START_URL.replace('https://', '')}#Intent;scheme=https;package=com.agrotech.app;end;`;
+      window.location.href = intentUrl;
+      
+      // Fallback: se não abrir, redireciona para a loja ou site
+      setTimeout(() => {
+        window.location.href = "https://play.google.com/store/apps/details?id=com.agrotech.app";
+      }, 500);
+      
+    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      // Para iOS: tenta abrir com universal link
+      window.location.href = PWA_START_URL;
+      
+      // Mostra instruções de instalação para iOS
+      alert('Para instalar no iPhone: clique em Compartilhar e depois "Adicionar à Tela de Início"');
+    }
+  } else {
+    // No desktop, apenas mostra instruções
+    alert('No computador, você pode instalar o app clicando no ícone de instalação na barra de endereços do navegador quando estiver no site do app.');
+    window.open(PWA_URL, '_blank');
+  }
+};
+
   const headerRef = useRef(null);
   const heroTextRef = useRef(null);
   const heroImgRef = useRef(null);
@@ -118,7 +137,6 @@ export default function LandingPage() {
           <h1>Serviços para <span>agricultura inteligente</span></h1>
           <p>Drones de alta precisão para monitoramento de safras contra pragas e doenças.</p>
           <div className="hero-buttons">
-            <a href="/app" className="btn">Acessar Plataforma</a>
             <button onClick={handleInstallClick} className="btn btn-install">
               📲 Baixar App
             </button>
