@@ -24,34 +24,44 @@ gsap.registerPlugin(ScrollTrigger);
 export default function LandingPage() {
 
   const handleInstallClick = async () => {
+  const PWA_URL = "https://app-tcc-v4.vercel.app"; // URL do seu PWA
+  
   // Detectar se é dispositivo móvel
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   
-  if (isMobile) {
-    // Tenta abrir diretamente o app se já estiver instalado
-     const PWA_URL = "https://app-tcc-v4.vercel.app"; // ← COLOQUE A URL DO SEU PWA AQUI
+  if (isAndroid) {
+    // Para Android: redireciona para o PWA com parâmetro de instalação
+    // O próprio PWA vai lidar com o prompt de instalação
+    window.location.href = `${PWA_URL}?install=true`;
     
-    if (/Android/i.test(navigator.userAgent)) {
-      // Para Android: tenta abrir com intent
-      const intentUrl = `intent://${PWA_START_URL.replace('https://', '')}#Intent;scheme=https;package=com.agrotech.app;end;`;
-      window.location.href = intentUrl;
-      
-      // Fallback: se não abrir, redireciona para a loja ou site
-      setTimeout(() => {
-        window.location.href = "https://play.google.com/store/apps/details?id=com.agrotech.app";
-      }, 500);
-      
-    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      // Para iOS: tenta abrir com universal link
-      window.location.href = PWA_START_URL;
-      
-      // Mostra instruções de instalação para iOS
-      alert('Para instalar no iPhone: clique em Compartilhar e depois "Adicionar à Tela de Início"');
-    }
-  } else {
-    // No desktop, apenas mostra instruções
-    alert('No computador, você pode instalar o app clicando no ícone de instalação na barra de endereços do navegador quando estiver no site do app.');
+    // Mostra instrução
+    setTimeout(() => {
+      alert('📱 Quando a tela de instalação aparecer, clique em "Instalar"');
+    }, 1000);
+    
+  } else if (isIOS) {
+    // Para iOS: abre o site e mostra instruções
     window.open(PWA_URL, '_blank');
+    
+    // Instruções para iOS (delay para não sobrepor a abertura)
+    setTimeout(() => {
+      alert('📱 Para instalar no iPhone/iPad:\n\n' +
+            '1. Toque no botão Compartilhar (📤)\n' +
+            '2. Role para baixo e escolha "Adicionar à Tela de Início"\n' +
+            '3. Toque em "Adicionar" no canto superior direito');
+    }, 2000);
+    
+  } else {
+    // No desktop, abre em nova aba
+    window.open(PWA_URL, '_blank');
+    
+    // Instruções para desktop
+    setTimeout(() => {
+      alert('💻 No computador:\n\n' +
+            'Clique no ícone de instalação (⬇️) na barra de endereços do navegador');
+    }, 2000);
   }
 };
 
