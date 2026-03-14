@@ -22,6 +22,19 @@ import droneMonitor from "../../public/assets/icons/conectadoSafra.json";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
+
+  const PWA_URL = "https://app-tcc-v4.vercel.app"; // ← COLOQUE A URL DO SEU PWA AQUI
+
+  // Função para instalar o app
+  const handleInstallClick = () => {
+    // Redireciona para o PWA com parâmetro de instalação
+    window.location.href = `${PWA_URL}?install=true`;
+  };
+
+  // Função para acessar o app (sem instalação)
+  const handleAccessApp = () => {
+    window.location.href = PWA_URL;
+  };
   
   const headerRef = useRef(null);
   const heroTextRef = useRef(null);
@@ -106,7 +119,11 @@ export default function LandingPage() {
           <p>Drones de alta precisão para monitoramento de safras contra pragas e doenças.</p>
           <div className="hero-buttons">
             <a href="/app" className="btn">Acessar Plataforma</a>
+            <button onClick={handleInstallClick} className="btn btn-install">
+              📲 Baixar App
+            </button>
           </div>
+           
         </div>
         <div className="hero-img" ref={heroImgRef}>
           <img src="public/assets/images/Mockup_cell2.png" alt="Mockup celular" />
