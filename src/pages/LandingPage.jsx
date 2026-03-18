@@ -2,7 +2,8 @@
   import emailjs from "@emailjs/browser";
   import { 
     FaEnvelope, FaUser, FaComment, FaCheckCircle, 
-    FaTimesCircle, FaTiktok, FaInstagram, FaLinkedin, FaFacebook 
+    FaTimesCircle, FaTiktok, FaInstagram, FaLinkedin, FaFacebook, 
+    FaDownload, FaRegAddressCard, FaMailBulk, FaPhoneAlt
   } from 'react-icons/fa';
   import "../styles/LandingPage.css";
   // Import do LottieAnimation (NOSSO COMPONENTE)
@@ -150,7 +151,7 @@
             <p>Drones de alta precisão para monitoramento de safras contra pragas e doenças.</p>
             <div className="hero-buttons">
               <button onClick={handleInstallClick} className="btn btn-install">
-                📲 Baixar App
+                <FaDownload /> Baixar App
               </button>
             </div>
             
@@ -373,10 +374,10 @@
 
             <div className="footer-col">
               <h3>Onde estamos</h3>
-              <p>📍 Americana - SP</p>
+              <p><div className="centralizar-footer"><FaRegAddressCard color="#4dffbe" /> Americana - SP</div></p>
               <p>Atendimento em toda região do interior paulista.</p>
-              <p>📧 contato@agrotech.com</p>
-              <p>📞 (19) 99999-9999</p>
+              <p><div className="centralizar-footer"><FaMailBulk color="#4dffbe" /> contato@agrotech.com</div></p>
+              <p><div className="centralizar-footer"><FaPhoneAlt color="#4dffbe" /> (19) 99999-9999</div></p>
             </div>
 
             <div className="footer-col footer-action">
