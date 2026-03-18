@@ -197,7 +197,7 @@
                 <LottieAnimation animationData={downloadApp} loop={true} className="step-lottie" />
               </div>
               <h3>Baixe o App</h3>
-              <p>Disponível para Android e iOS na Google Play e App Store</p>
+              <p>Aperte o botão "Baixar App" para instalar o aplicativo</p>
             </div>
             <div className="step-card">
               <div className="step-number">2</div>

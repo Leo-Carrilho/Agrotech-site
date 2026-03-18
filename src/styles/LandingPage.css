@@ -974,6 +974,9 @@ a,
   .footer-col a {
     margin: 0 auto;
   }
+  .centralizar-footer {
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1022,6 +1025,9 @@ a,
   .footer-logo {
     font-size: 20px;
   }
+  .centralizar-footer {
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -1039,5 +1045,9 @@ a,
 
   .hero-img img {
     width: 220px;
+  }
+  .centralizar-footer {
+    flex-direction: column;
+    gap: 5px;
   }
 }
