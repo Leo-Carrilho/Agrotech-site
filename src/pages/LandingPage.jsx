@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function LandingPage() {
 
   const handleInstallClick = async () => {
-  const PWA_URL = "https://app-tcc-v4.vercel.app"; // URL do seu PWA
+  const PWA_URL = "https://Teste_Integra-o_API_Site.vercel.app"; // URL do seu PWA
   
   // Detectar se é dispositivo móvel
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
