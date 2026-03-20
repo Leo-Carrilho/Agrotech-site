@@ -8,7 +8,7 @@
   import "../styles/LandingPage.css";
   import LottieAnimation from "../components/LottieAnimation";
   import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 
   import monitoramento from "../../public/assets/icons/monitoramento.json";
@@ -123,7 +123,7 @@
           <h1 className="logo logo-title">AGROTECH</h1>
           <nav className="nav-menu">
             <a href="#">Home</a>
-            <a href="#servicos">Serviços</a>
+            <a href="/services">Serviços</a>
             <a href="/como-acessar">Como acessar</a>
             <a href="#contato">Contato</a>
             <a href="/app" className="nav-btn">Nossa plataforma</a>
@@ -345,7 +345,7 @@
             <div className="footer-col">
               <h3>Links rápidos</h3>
               <a href="#">Início</a>
-              <a href="#servicos">Serviços</a>
+              <a href="/services">Serviços</a>
               <a href="/como-acessar">Como acessar</a>
               <a href="#contato">Contato</a>
             </div>
