@@ -6,12 +6,11 @@
     FaDownload, FaRegAddressCard, FaMailBulk, FaPhoneAlt
   } from 'react-icons/fa';
   import "../styles/LandingPage.css";
-  // Import do LottieAnimation (NOSSO COMPONENTE)
   import LottieAnimation from "../components/LottieAnimation";
   import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-  // IMPORTS DAS ANIMAÇÕES
+
   import monitoramento from "../../public/assets/icons/monitoramento.json";
   import analiseSafra from "../../public/assets/icons/analiseSafra.json";
   import mapeamento from "../../public/assets/icons/mapeamento.json";
@@ -25,37 +24,24 @@
   export default function LandingPage() {
 
   const handleInstallClick = async () => {
-  const PWA_URL = "https://teste-integra-o-api-site.vercel.app"; // URL do seu PWA
+  const PWA_URL = "https://app-tcc-instalacao.vercel.app" 
   
-  // Detectar se é dispositivo móvel
+
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const isAndroid = /Android/i.test(navigator.userAgent);
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   
   if (isAndroid) {
-    // Para Android: redireciona para o PWA com parâmetro de instalação
-    // O próprio PWA vai lidar com o prompt de instalação
     window.location.href = `${PWA_URL}?install=true`;
     
-    // Mostra instrução
     setTimeout(() => {
       alert('📱 Quando a tela de instalação aparecer, clique em "Instalar"');
     }, 1000);
     
   } else if (isIOS) {
-    // Para iOS: abre o site e mostra instruções
     window.open(PWA_URL, '_blank');
     
-    // Instruções para iOS (delay para não sobrepor a abertura)
-    setTimeout(() => {
-      alert('📱 Para instalar no iPhone/iPad:\n\n' +
-            '1. Toque no botão Compartilhar (📤)\n' +
-            '2. Role para baixo e escolha "Adicionar à Tela de Início"\n' +
-            '3. Toque em "Adicionar" no canto superior direito');
-    }, 2000);
-    
   } else {
-    // fallback
     window.location.href = PWA_URL;
   }
 };
@@ -137,7 +123,7 @@
           <h1 className="logo logo-title">AGROTECH</h1>
           <nav className="nav-menu">
             <a href="#">Home</a>
-            <a href="#servicos">Serviços</a>
+            <a href="/services">Serviços</a>
             <a href="/como-acessar">Como acessar</a>
             <a href="#contato">Contato</a>
             <a href="/app" className="nav-btn">Nossa plataforma</a>
@@ -359,7 +345,7 @@
             <div className="footer-col">
               <h3>Links rápidos</h3>
               <a href="#">Início</a>
-              <a href="#servicos">Serviços</a>
+              <a href="/services">Serviços</a>
               <a href="/como-acessar">Como acessar</a>
               <a href="#contato">Contato</a>
             </div>

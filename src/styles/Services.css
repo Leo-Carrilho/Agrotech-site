@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+   outline: none !important;
+}
+
+
+
+:root {
+  --primary: #16f29a;
+  --primary-dark: #10c97b;
+  --primary-glow: rgba(30, 255, 165, 0.35);
+  --background-dark: #080f0c;
+  --background-light: #11241b;
+  --text-primary: #f8fafc;
+  --text-secondary: #a3b3c2;
+  --glass-border: rgba(255, 255, 255, 0.07);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--background-dark);
+  color: white;
+}
+
+/* ===== HEADER ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(8, 15, 12, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  font-family: "Jersey 15", sans-serif;
+  font-size: 40px;
+  color: var(--primary);
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+.nav-btn {
+  background: var(--primary);
+  padding: 8px 18px;
+  border-radius: 20px;
+  color: black !important;
+  font-weight: 600;
+}
+
+.nav-btn:hover {
+  background: var(--primary-dark);
+  color: black !important;
+}
