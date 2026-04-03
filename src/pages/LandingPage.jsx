@@ -23,7 +23,7 @@
   export default function LandingPage() {
 
   const handleInstallClick = async () => {
-  const PWA_URL = "https://instalacao-mobile.vercel.app" 
+  const PWA_URL = "https://app-tcc-rho.vercel.app" 
   
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
