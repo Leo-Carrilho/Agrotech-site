@@ -4,19 +4,12 @@ import {
   FaMap, FaRegAddressCard, FaMailBulk, FaPhoneAlt, FaWhatsapp
 } from 'react-icons/fa';
 import "../styles/Services.css";
+import Header from '../components/Header';
 
 export default function Services() {
   return (
     <>
-      <header>
-        <h1 className="logo logo-title">AGROTECH</h1>
-        <nav className="nav-menu">
-          <a href="/">Home</a>
-          <a href="/services" className="active">Serviços</a>
-          <a href="/como-acessar">Como acessar</a>
-          <a href="/app" className="nav-btn">Nossa plataforma</a>
-        </nav>
-      </header>
+      <Header />
 
       {/* HERO SECTION */}
       <section className="services-hero">

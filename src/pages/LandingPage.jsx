@@ -8,6 +8,7 @@
   import LottieAnimation from "../components/LottieAnimation";
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger"
+  import Header from "../components/Header";
 
 
   import monitoramento from "../../public/assets/icons/monitoramento.json";
@@ -146,16 +147,7 @@
 
     return (
       <>
-        <header ref={headerRef}>
-          <h1 className="logo logo-title">AGROTECH</h1>
-          <nav className="nav-menu">
-            <a href="#">Home</a>
-            <a href="/services">Serviços</a>
-            <a href="/servicesr">Como acessar</a>
-            <a href="#contato">Contato</a>
-            <a href="/app" className="nav-btn">Nossa plataforma</a>
-          </nav>
-        </header>
+        <Header />
 
         <section className="hero">
           <div className="hero-text" ref={heroTextRef}>
