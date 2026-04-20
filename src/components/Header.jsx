@@ -1,74 +1,80 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+// components/Header.jsx
+import { useEffect, useRef, useState } from "react";
+import { FaBars, FaTimes, FaLeaf } from "react-icons/fa";
 
-export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navMenuRef = useRef(null);
-  const menuOverlayRef = useRef(null);
+export default function Header({ onInstallClick }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef(null);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
-
-  // Previne scroll do body quando menu mobile estiver aberto
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+    const gsap = window.gsap;
+    if (!gsap) return;
+
+    gsap.fromTo(
+      headerRef.current,
+      { y: -80, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.2 }
+    );
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  const handlePlatformAccess = () => {
+    if (onInstallClick) {
+      onInstallClick();
     } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileMenuOpen]);
-
-  // Fecha o menu ao redimensionar para desktop
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768 && mobileMenuOpen) {
-        closeMobileMenu();
+      // Fallback: redirecionar para URL de instalação
+      const PWA_URL = "https://instalacao-mobile.vercel.app";
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      
+      if (isAndroid) {
+        window.location.href = `${PWA_URL}?install=true`;
+        setTimeout(() => {
+          alert('📱 Quando a tela de instalação aparecer, clique em "Instalar"');
+        }, 1000);
+      } else if (isIOS) {
+        alert('📱 Para instalar no iPhone: Toque no botão Compartilhar e depois "Adicionar à Tela de Início"');
+        window.open(PWA_URL, '_blank');
+      } else {
+        window.open(PWA_URL, '_blank');
       }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [mobileMenuOpen]);
+    }
+  };
 
   return (
-    <header>
-      <h1 className="logo logo-title">AGROTECH</h1>
+    <>
+      <div
+        className={`menu-overlay ${menuOpen ? "active" : ""}`}
+        onClick={closeMenu}
+      />
 
-      {/* Botão Hamburguer */}
-      <button 
-        className={`hamburger ${mobileMenuOpen ? 'active' : ''}`} 
-        onClick={toggleMobileMenu}
-        aria-label="Menu"
-      >
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </button>
+      <header ref={headerRef}>
+        <div className="header-circuit-line" />
 
-      {/* Menu de navegação */}
-      <nav className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`} ref={navMenuRef}>
-        <Link to="/" onClick={closeMobileMenu}>Home</Link>
-        <Link to="/services" onClick={closeMobileMenu}>Serviços</Link>
-        <Link to="/como-acessar" onClick={closeMobileMenu}>Como acessar</Link>
-        <Link to="/#contato" onClick={closeMobileMenu}>Contato</Link>
-        <Link to="/app" className="nav-btn" onClick={closeMobileMenu}>
-          Nossa plataforma
-        </Link>
-      </nav>
+        <a href="#hero" className="logo" onClick={closeMenu}>
+          <FaLeaf className="logo-icon" /> Zenith
+        </a>
 
-      {/* Overlay para fechar o menu ao clicar fora */}
-      <div 
-        className={`menu-overlay ${mobileMenuOpen ? 'active' : ''}`} 
-        onClick={closeMobileMenu}
-        ref={menuOverlayRef}
-      ></div>
-    </header>
+        <button
+          className={`hamburger ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Menu"
+        >
+          {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+        </button>
+
+        <nav className={`nav-menu ${menuOpen ? "active" : ""}`}>
+          <a href="#hero" onClick={closeMenu}>Início</a>
+          <a href="#servicos" onClick={closeMenu}>Serviços</a>
+          <a href="#como-funciona" onClick={closeMenu}>Como Funciona</a>
+          <a href="#planos" onClick={closeMenu}>Planos</a>
+          <a href="#contato" onClick={closeMenu}>Contato</a>
+          <button className="nav-btn" onClick={handlePlatformAccess}>
+            Acessar Plataforma
+          </button>
+        </nav>
+      </header>
+    </>
   );
 }
